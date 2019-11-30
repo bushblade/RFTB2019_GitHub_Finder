@@ -13,39 +13,39 @@ import './App.css'
 const App = () => {
   const [users, setUsers] = useState([]),
     [user, setUser] = useState({}),
-    [repos, setRepose] = useState([]),
+    [repos, setRepos] = useState([]),
     [loading, setLoading] = useState(false),
     [alert, setAlert] = useState(null)
 
-  // search github users
-  const searchUsers = async text => {
+  const loadingDecorator = func => async arg => {
     setLoading(true)
+    await func(arg)
+    setLoading(false)
+  }
+
+  // search github users
+  const searchUsers = loadingDecorator(async text => {
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
     setUsers(res.data.items)
-    setLoading(false)
-  }
+  })
 
   // get single github user
-  const getUser = async username => {
-    setLoading(true)
+  const getUser = loadingDecorator(async username => {
     const res = await axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
     setUser(res.data)
-    setLoading(false)
-  }
+  })
 
   // get users repos
-  const getUserRepos = async username => {
-    setLoading(true)
+  const getUserRepos = loadingDecorator(async username => {
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
-    setRepose(res.data)
-    setLoading(false)
-  }
+    setRepos(res.data)
+  })
 
   // clear users
   const clearUsers = () => {
