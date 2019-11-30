@@ -12,23 +12,9 @@ import GithubState from './context/github/GitHubState'
 import './App.css'
 
 const App = () => {
-  const [users, setUsers] = useState([]),
-    [user, setUser] = useState({}),
-    [repos, setRepos] = useState([]),
+  const [repos, setRepos] = useState([]),
     [loading, setLoading] = useState(false),
     [alert, setAlert] = useState(null)
-
-  // search github users
-
-  // get single github user
-  const getUser = async username => {
-    setLoading(true)
-    const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    )
-    setUser(res.data)
-    setLoading(false)
-  }
 
   // get users repos
   const getUserRepos = async username => {
@@ -41,10 +27,6 @@ const App = () => {
   }
 
   // clear users
-  const clearUsers = () => {
-    setUsers([])
-    setLoading(false)
-  }
 
   // set Alert
   const showAlert = (msg, type) => {
@@ -65,12 +47,8 @@ const App = () => {
                 path='/'
                 render={props => (
                   <Fragment>
-                    <Search
-                      clearUsers={clearUsers}
-                      showClear={users.length > 0}
-                      setAlert={showAlert}
-                    />
-                    <Users loading={loading} users={users} />
+                    <Search setAlert={showAlert} />
+                    <Users />
                   </Fragment>
                 )}
               />
@@ -79,14 +57,7 @@ const App = () => {
                 exact
                 path={`/user/:login`}
                 render={props => (
-                  <User
-                    {...props}
-                    getUser={getUser}
-                    getUserRepos={getUserRepos}
-                    repos={repos}
-                    user={user}
-                    loading={loading}
-                  />
+                  <User {...props} getUserRepos={getUserRepos} repos={repos} />
                 )}
               />
             </Switch>
