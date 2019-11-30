@@ -31,7 +31,6 @@ class App extends Component {
   // get single github user
   getUser = async username => {
     this.setState({ loading: true })
-    console.log(username)
     const res = await axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
@@ -42,7 +41,6 @@ class App extends Component {
   // get users repos
   getUserRepos = async username => {
     this.setState({ loading: true })
-    console.log(username)
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
