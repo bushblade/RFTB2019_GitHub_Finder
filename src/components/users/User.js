@@ -30,7 +30,8 @@ const User = ({
   useEffect(() => {
     getUser(params.login)
     getUserRepos(params.login)
-  }, [params.login, getUser, getUserRepos])
+    // eslint-disable-next-line
+  }, [])
 
   if (loading) return <Spinner />
 
