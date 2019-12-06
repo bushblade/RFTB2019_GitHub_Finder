@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const gitGet = query =>
   axios.get(
-    `https://api.github.com${query}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
+    `https://api.github.com${query}client_id=${githubClientId}&client_secret=${githubClientSecret}`
   )
 
 const GithubState = props => {
@@ -43,14 +43,14 @@ const GithubState = props => {
   // search user
   const searchUsers = async text => {
     setLoading()
-    const res = await gitGet(`/search/users?q=${text}`)
+    const res = await gitGet(`/search/users?q=${text}&`)
     dispatch({ type: SEARCH_USERS, payload: res.data.items })
   }
 
   // get user
   const getUser = async username => {
     setLoading()
-    const res = await gitGet(`/users/${username}`)
+    const res = await gitGet(`/users/${username}?`)
     dispatch({ type: GET_USER, payload: res.data })
   }
 
@@ -58,7 +58,7 @@ const GithubState = props => {
   const getUserRepos = async username => {
     setLoading()
     const res = await gitGet(
-      `/users/${username}/repos?per_page=5&sort=created:asc`
+      `/users/${username}/repos?per_page=5&sort=created:asc?`
     )
     dispatch({ type: GET_REPOS, payload: res.data })
   }
