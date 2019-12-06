@@ -40,23 +40,25 @@ const GithubState = props => {
   // set loading
   const setLoading = () => dispatch({ type: SET_LOADING })
 
+  const withLoading = fn => (...args) => {
+    setLoading()
+    fn(...args)
+  }
+
   // search user
   const searchUsers = async text => {
-    setLoading()
     const res = await gitGet(`/search/users?q=${text}&`)
     dispatch({ type: SEARCH_USERS, payload: res.data.items })
   }
 
   // get user
   const getUser = async username => {
-    setLoading()
     const res = await gitGet(`/users/${username}?`)
     dispatch({ type: GET_USER, payload: res.data })
   }
 
   // get users repos
   const getUserRepos = async username => {
-    setLoading()
     const res = await gitGet(
       `/users/${username}/repos?per_page=5&sort=created:asc?`
     )
@@ -70,10 +72,10 @@ const GithubState = props => {
         user: state.user,
         repos: state.repos,
         loading: state.loading,
-        searchUsers,
+        searchUsers: withLoading(searchUsers),
         clearUsers,
-        getUser,
-        getUserRepos
+        getUser: withLoading(getUser),
+        getUserRepos: withLoading(getUserRepos)
       }}
     >
       {props.children}
