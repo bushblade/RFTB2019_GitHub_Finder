@@ -23,9 +23,9 @@ Additionally any environment variable we set needs to be prefixed with `REACT_AP
 
 [create-react-app docs for further reading](https://create-react-app.dev/docs/adding-custom-environment-variables/)
 
-The environment variables only prevent your keys from being shared in your GitHub repo, anyone who inspects the code or looks at the network requests **will see your keys**, they're not private unless the server is making the API requests, not our client side app.
-So this may be something you would want to be aware of going into production with your own projects.
-So even if we do set up continuous deployment from GitHub to Netlify our keys will be available after Netlify runs the build.
+> The environment variables only prevent your keys from being shared in your GitHub repo, anyone who inspects the code or looks at the network requests **will see your keys**, they're not private unless the server is making the API requests, not our client side app.
+> So this may be something you would want to be aware of going into production with your own projects.
+> So even if we do set up continuous deployment from GitHub to Netlify our keys will be available after Netlify runs the build.
 
 ### To install and run locally
 
