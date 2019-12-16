@@ -16,7 +16,11 @@ For the environment variables we set in the Netlify UI to be used we need to let
 If we run `npm run` build then `netlify deploy --prod` as per lesson **5-35** we are running the build on our local machine.
 
 Additionally any environment variable we set needs to be prefixed with `REACT_APP_`, even for deploying to Netlify.
-`process.env.NODE_ENV` allows us to check the the environment (**develpment** in dev server and **production** in build).
+`process.env.NODE_ENV` allows us to check the the environment
+(**develpment** in dev server and **production** in build).
+
+**You cannot override NODE_ENV manually**
+
 [create-react-app docs for further reading](https://create-react-app.dev/docs/adding-custom-environment-variables/)
 
 The environment variables only prevent your keys from being shared in your GitHub repo, anyone who inspects the code or looks at the network requests **will see your keys**, they're not private unless the server is making the API requests, not our client side app.
