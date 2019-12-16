@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# RFTB2019 GitHub Finder
 
-## Available Scripts
+The first project in Brad Traversy's [React Front to Back 2019](https://www.udemy.com/share/101XdqAkUadVtQTH4=/) Udemy course.
 
-In the project directory, you can run:
+I have created a branch for every lecture in the course so if you're having problems with a specific section of the project you can checkout that branch and compare your code.
 
-### `npm start`
+For example if you're having problems on **Section 5 lesson 27** then checkout branch **s5-27**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The master branch is the final completed project.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Some notes before you deploy
 
-### `npm test`
+For the environment variables we set in the Netlify UI to be used we need to let Netlify run the build which as far as I know only works if you deploy from GitHub.
+If we run `npm run` build then `netlify deploy --prod` as per lesson **5-35** we are running the build on our local machine so our environment variables will be undefined.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The environment variables only prevent your keys from being shared in your GitHub repo, anyone who inspects the code or looks at the network requests **will see your keys**, they're not private unless the server is making the API requests, not our client side app.
+So this may be something you would want to be aware of going into production with your own projects.
+So even if we do set up continuous deployment from GitHub to Netlify our keys will be available after Netlify runs the build.
 
-### `npm run build`
+### To install and run locally
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone the repo
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/bushblade/RFTB2019_GitHub_Finder.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Change into directory project
 
-### `npm run eject`
+```bash
+cd RFTB2019_GitHub_Finder
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm i
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Run the dev server
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+Build the project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```bash
+npm run build
+```
