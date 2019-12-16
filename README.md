@@ -13,7 +13,7 @@ The master branch is the final completed project.
 ## Some notes before you deploy
 
 For the environment variables we set in the Netlify UI to be used we need to let Netlify run the build which as far as I know only works if you deploy from GitHub.
-If we run `npm run` build then `netlify deploy --prod` as per lesson **5-35** we are running the build on our local machine so our environment variables will be undefined.
+If we run `npm run` build then `netlify deploy --prod` as per lesson **5-35** we are running the build on our local machine.
 
 Additionally any environment variable we set needs to be prefixed with `REACT_APP_`, even for deploying to Netlify.
 `process.env.NODE_ENV` allows us to check the the environment (**develpment** in dev server and **production** in build).
