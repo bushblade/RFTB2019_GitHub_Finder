@@ -11,16 +11,10 @@ export const searchUsers = async text => {
   return res.data.items
 }
 
-// get user
-export const getUser = async username => {
-  const res = await gitGet(`/users/${username}?`)
-  return res.data
-}
-
-// get users repos
-export const getUserRepos = async username => {
-  const res = await gitGet(
+export const getUserAndRepos = async username => {
+  const repos = await gitGet(
     `/users/${username}/repos?per_page=5&sort=created:asc?`
   )
-  return res.data
+  const user = await gitGet(`/users/${username}?`)
+  return { user: user.data, repos: repos.data }
 }

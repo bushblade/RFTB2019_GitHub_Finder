@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import GithubContext from '../../context/github/gitHubContext'
 import Spinner from '../layout/Spinner'
 import Repos from '../repos/Repos'
-import { getUser, getUserRepos } from '../../context/github/actions'
-import { GET_USER, GET_REPOS, SET_LOADING } from '../../context/types'
+import { getUserAndRepos } from '../../context/github/actions'
+import { GET_USER_AND_REPOS, SET_LOADING } from '../../context/types'
 
 const User = ({ match: { params } }) => {
   const {
@@ -31,11 +31,8 @@ const User = ({ match: { params } }) => {
 
   useEffect(() => {
     dispatch({ type: SET_LOADING })
-    getUser(params.login).then(user =>
-      dispatch({ type: GET_USER, payload: user })
-    )
-    getUserRepos(params.login).then(repos =>
-      dispatch({ type: GET_REPOS, payload: repos })
+    getUserAndRepos(params.login).then(res =>
+      dispatch({ type: GET_USER_AND_REPOS, payload: res })
     )
   }, [dispatch, params.login])
 
