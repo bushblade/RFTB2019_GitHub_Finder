@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import GithubContext from '../../context/github/gitHubContext'
 import Spinner from '../layout/Spinner'
 import Repos from '../repos/Repos'
+import { getUser, getUserRepos } from '../../context/github/actions'
+import { GET_USER, GET_REPOS, SET_LOADING } from '../../context/types'
 
 const User = ({ match: { params } }) => {
   const {
@@ -23,16 +25,19 @@ const User = ({ match: { params } }) => {
       company
     },
     loading,
-    getUser,
-    getUserRepos,
+    dispatch,
     repos
   } = useContext(GithubContext)
 
   useEffect(() => {
-    getUser(params.login)
-    getUserRepos(params.login)
-    // eslint-disable-next-line
-  }, [])
+    dispatch({ type: SET_LOADING })
+    getUser(params.login).then(user =>
+      dispatch({ type: GET_USER, payload: user })
+    )
+    getUserRepos(params.login).then(repos =>
+      dispatch({ type: GET_REPOS, payload: repos })
+    )
+  }, [dispatch, params.login])
 
   if (loading) return <Spinner />
 

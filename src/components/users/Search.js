@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import GithubContext from '../../context/github/gitHubContext'
 import AlertContext from '../../context/alert/alertContext'
+import { searchUsers } from '../../context/github/actions'
+import { SEARCH_USERS, SET_LOADING, CLEAR_USERS } from '../../context/types'
 
 const Search = () => {
-  const { searchUsers, clearUsers, users } = useContext(GithubContext)
+  const { dispatch, users } = useContext(GithubContext)
   const { setAlert } = useContext(AlertContext)
 
   const [text, setText] = useState('')
@@ -13,8 +15,11 @@ const Search = () => {
     if (text === '') {
       setAlert('Please enter something', 'light')
     } else {
-      searchUsers(text)
-      setText('')
+      dispatch({ type: SET_LOADING })
+      searchUsers(text).then(users => {
+        dispatch({ type: SEARCH_USERS, payload: users })
+        setText('')
+      })
     }
   }
 
@@ -37,7 +42,10 @@ const Search = () => {
         />
       </form>
       {users.length > 0 && (
-        <button className='btn btn-light btn-block' onClick={clearUsers}>
+        <button
+          className='btn btn-light btn-block'
+          onClick={() => dispatch({ type: CLEAR_USERS })}
+        >
           Clear
         </button>
       )}
