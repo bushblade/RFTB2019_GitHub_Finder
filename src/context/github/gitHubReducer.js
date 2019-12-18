@@ -32,6 +32,6 @@ export default (state, action) => {
         loading: false
       }
     default:
-      return state
+      throw Error(`Unhandled Action: ${action.type}`)
   }
 }
