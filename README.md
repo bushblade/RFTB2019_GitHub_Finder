@@ -1,14 +1,26 @@
 # RFTB2019 GitHub Finder
 
-## Deployed [![Netlify Status](https://api.netlify.com/api/v1/badges/2b163611-727d-47b9-9168-ca9b083f8662/deploy-status)](https://app.netlify.com/sites/vigorous-liskov-f8f1c7/deploys) [link to app](https://vigorous-liskov-f8f1c7.netlify.com/)
-
 The first project in Brad Traversy's [React Front to Back 2019](https://www.udemy.com/share/101XdqAkUadVtQTH4=/) Udemy course.
 
-I have created a branch for every lecture in the course so if you're having problems with a specific section of the project you can checkout that branch and compare your code.
+The master branch is the final completed project from the course.
 
-For example if you're having problems on **Section 5 lesson 27** then checkout branch **s5-27**
+## This branch I have refactored to take a more hook friendly context approach.
 
-The master branch is the final completed project.
+I think Brad at the time of the course tried to substitute lifecycle methods with the closest hooks approximation which is understandable and I see a lot of tutorials and courses doing much the same. Hooks were very new at the time of recording,
+however hooks require a completely different approach and thought process really. We need to think in terms of hooks and functions and not lifecycle. If you're looking at this branch and wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
+
+To summarize the issues we faced in the course though, and why we had to use `// eslint-disable-next-line` at all is that all our data fetching methods are in our context state (GitHubState.js) and passed down to all our components via the Provider. The problem with this is that every time we update our context state we create a new function which is a side effect and react tells us that side effects should be in a useEffect. If we include these functions in our useEffect dependency array (as the linter suggests) in `User.js` then each time we fetch data and our reducer runs it updates the context which triggers a re-render (creating a whole set of new functions). The useEffect dependency sees it as a new function and triggers another render which again updates the state when we call the function in our useEffect, which triggers another re-render and so on.... infinite loop of re-rendering.
+
+The solution is not to add an empty array and tell the linter to ignore it (trying to make a componentDidMount out of useEffect), but to think in terms of hooks and functions.
+
+so...
+
+1. Take all our fetching data methods out of GitHubState to keep them pure and not re-create a new function on each render/update [actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/context/github/actions.js).
+2. return the promise from our data fetching methods.
+3. Only pass down our dispatch from our GitHubState Provider (React guarantees that our dispatch returned from useReducer is static and won't change) [GitHubState.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/context/github/GitHubState.js).
+4. Import the data fetching method we need in the component we need it, call that function in a component level useEffect and then dipsatch from our component [User.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/components/users/User.js).
+
+This cleans up our app considerably, follows the good advice from the react guidelines/linter, improves the quality and readability of our code and now we are thinking in terms of hooks and functions.
 
 ## Some notes before you deploy
 
