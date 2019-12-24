@@ -6,6 +6,8 @@ The first project in Brad Traversy's [React Front to Back 2019](https://www.udem
 
 I have created a branch for every lecture in the course so if you're having problems with a specific section of the project you can checkout that branch and compare your code.
 
+Please also consider checking out my [refactor branch](https://github.com/bushblade/RFTB2019_GitHub_Finder/tree/refactor) which takes a more hook friendly approach to using Context if you're not comfortable with `// eslint-disable-next-line` and want to know what's going on there.
+
 For example if you're having problems on **Section 5 lesson 27** then checkout branch **s5-27**
 
 The master branch is the final completed project.
