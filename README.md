@@ -12,6 +12,16 @@ For example if you're having problems on **Section 5 lesson 27** then checkout b
 
 The master branch is the final completed project.
 
+## Updates since course published
+
+Since the course was published, GitHub has [depreciated authentication via URL query parameters](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters)
+You can get an access token by following [these instructions](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+For this app we don't need to add any permissions so don't select any in the _scopes_.
+**DO NOT SHARE ANY TOKENS THAT HAVE PERMISSIONS**
+This would leave your account or repositories vulnerable, depending on permissions set.
+
+For an example of how to use the token please checkout my [refactored branch here](https://github.com/bushblade/RFTB2019_GitHub_Finder/tree/refactor#updates-since-course-published)
+
 ## Some notes before you deploy
 
 For the environment variables we set in the Netlify UI to be used we need to let Netlify run the build which as far as I know only works if you deploy from GitHub.
