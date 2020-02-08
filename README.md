@@ -24,6 +24,22 @@ so...
 
 This cleans up our app considerably, follows the good advice from the react guidelines/linter, improves the quality and readability of our code and now we are thinking in terms of hooks and functions.
 
+## Updates since course published
+
+Since the course was published, GitHub has [depreciated authentication via URL query parameters](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters)
+You can get an access token by following [these instructions](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+For this app we don't need to add any permissions so don't select any in the _scopes_.
+**DO NOT SHARE ANY TOKENS THAT HAVE PERMISSIONS**
+This would leave your account or repositories vulnerable, depending on permissions set.
+
+On this branch you can see how to use the generated code in [/src/context/github/actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/context/github/actions.js)
+
+You'll also need to change up your `.env.local` file to include
+
+```
+REACT_APP_GITHUB_TOKEN='your_no_permissions_token_here'
+```
+
 ## Some notes before you deploy
 
 For the environment variables we set in the Netlify UI to be used we need to let Netlify run the build which as far as I know only works if you deploy from GitHub.
