@@ -32,7 +32,7 @@ For this app we don't need to add any permissions so don't select any in the _sc
 **DO NOT SHARE ANY TOKENS THAT HAVE PERMISSIONS**
 This would leave your account or repositories vulnerable, depending on permissions set.
 
-On this branch you can see how to use the generated code in [/src/context/github/actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/context/github/actions.js)
+On this branch you can see how to use the generated token in [/src/context/github/actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/refactor/src/context/github/actions.js)
 
 You'll also need to change up your `.env.local` file to include
 
