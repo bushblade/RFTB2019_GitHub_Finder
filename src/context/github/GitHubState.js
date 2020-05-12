@@ -1,19 +1,26 @@
-import React, { useReducer } from 'react'
+import React, { useState } from 'react'
 
 import GithubContext from './gitHubContext'
-import githubReducer from './gitHubReducer'
 
 const GithubState = props => {
-  const initialState = {
-    users: [],
-    user: {},
-    repos: [],
-    loading: false
-  }
-  const [state, dispatch] = useReducer(githubReducer, initialState)
+  const [users, setUsers] = useState([])
+  const [user, setUser] = useState({})
+  const [repos, setRepos] = useState([])
+  const [loading, setLoading] = useState(false)
 
   return (
-    <GithubContext.Provider value={{ ...state, dispatch }}>
+    <GithubContext.Provider
+      value={{
+        users,
+        setUsers,
+        user,
+        setUser,
+        repos,
+        setRepos,
+        loading,
+        setLoading
+      }}
+    >
       {props.children}
     </GithubContext.Provider>
   )

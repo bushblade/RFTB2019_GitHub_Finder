@@ -5,7 +5,6 @@ import GithubContext from '../../context/github/gitHubContext'
 import Spinner from '../layout/Spinner'
 import Repos from '../repos/Repos'
 import { getUserAndRepos } from '../../context/github/actions'
-import { GET_USER_AND_REPOS, SET_LOADING } from '../../context/types'
 
 const User = ({ match: { params } }) => {
   const {
@@ -25,16 +24,20 @@ const User = ({ match: { params } }) => {
       company
     },
     loading,
-    dispatch,
+    setLoading,
+    setUser,
+    setRepos,
     repos
   } = useContext(GithubContext)
 
   useEffect(() => {
-    dispatch({ type: SET_LOADING })
-    getUserAndRepos(params.login).then(res =>
-      dispatch({ type: GET_USER_AND_REPOS, payload: res })
-    )
-  }, [dispatch, params.login])
+    setLoading(true)
+    getUserAndRepos(params.login).then(res => {
+      setUser(res.user)
+      setRepos(res.repos)
+      setLoading(false)
+    })
+  }, [params.login, setLoading, setRepos, setUser])
 
   if (loading) return <Spinner />
 
