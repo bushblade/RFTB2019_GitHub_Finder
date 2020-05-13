@@ -37,7 +37,7 @@ On this branch you can see how to use the generated token in [/src/context/githu
 You'll also need to change up your `.env.local` file to include
 
 ```
-REACT_APP_GITHUB_TOKEN='your_no_permissions_token_here'
+REACT_APP_GITHUB_TOKEN='token <your_no_permissions_token_here>'
 ```
 
 ## Some notes before you deploy
