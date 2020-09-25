@@ -11,6 +11,9 @@ however hooks require a completely different approach and thought process really
 
 If you're looking at this branch and wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
 
+
+There is also [this great article](https://epicreact.dev/myths-about-useeffect/) from Kent C. Dodds which covers the issues we had in this course very well.
+
 To summarize the issues we faced in the course though, and why we had to use `// eslint-disable-next-line` at all is that all our data fetching methods are in our context state (GitHubState.js) and passed down to all our components via the Provider. The problem with this is that every time we update our context state we create a new function which is a side effect and react tells us that side effects should be in a useEffect. If we include these functions in our useEffect dependency array (as the linter suggests) in `User.js` then each time we fetch data and our reducer runs it updates the context which triggers a re-render (creating a whole set of new functions). The useEffect dependency sees it as a new function and triggers another render which again updates the state when we call the function in our useEffect, which triggers another re-render and so on.... infinite loop of re-rendering.
 
 The solution is not to add an empty array and tell the linter to ignore it (trying to make a componentDidMount out of useEffect), but to think in terms of hooks and functions.
