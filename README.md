@@ -1,7 +1,5 @@
 # RFTB2019 GitHub Finder
 
-## Deployed [![Netlify Status](https://api.netlify.com/api/v1/badges/2b163611-727d-47b9-9168-ca9b083f8662/deploy-status)](https://app.netlify.com/sites/vigorous-liskov-f8f1c7/deploys) [link to app](https://vigorous-liskov-f8f1c7.netlify.com/)
-
 The first project in Brad Traversy's [React Front to Back 2019](https://www.udemy.com/share/101XdqAkUadVtQTH4=/) Udemy course.
 
 I have created a branch for every lecture in the course so if you're having problems with a specific section of the project you can checkout that branch and compare your code.
