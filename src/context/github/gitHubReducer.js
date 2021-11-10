@@ -5,7 +5,7 @@ import {
   GET_USER_AND_REPOS
 } from '../types'
 
-export default (state, action) => {
+export default function githubReducer(state, action) {
   switch (action.type) {
     case SET_LOADING:
       return {
