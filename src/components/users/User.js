@@ -63,24 +63,24 @@ function User() {
           <p>Location: {location}</p>
         </div>
         <div>
-          {bio && (
-            <>
-              <h3>Bio</h3>
-              <p>{bio}</p>
-            </>
-          )}
+          <>
+            <h3>Bio</h3>
+            <p>{bio}</p>
+          </>
           <a href={html_url} className='btn btn-dark my-1'>
             Visit GitHub profile
           </a>
           <ul>
-            <li>{login && <strong>Username: {login} </strong>}</li>
-            <li>{company && <strong>Company: {company}</strong>}</li>
             <li>
-              {blog && (
-                <strong>
-                  Website: <a href={`https://${blog}`}>{blog}</a>{' '}
-                </strong>
-              )}
+              <strong>Username: {login} </strong>
+            </li>
+            <li>
+              <strong>Company: {company}</strong>
+            </li>
+            <li>
+              <strong>
+                Website: <a href={`https://${blog}`}>{blog}</a>{' '}
+              </strong>
             </li>
           </ul>
         </div>
