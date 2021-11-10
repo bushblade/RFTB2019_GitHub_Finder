@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NotFound = () => {
+function NotFound() {
   return (
     <div>
       <h1>Not Found</h1>

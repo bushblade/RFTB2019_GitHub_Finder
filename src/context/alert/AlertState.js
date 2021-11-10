@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AlertContext from './alertContext'
 
-const AlertState = props => {
+function AlertState({ children }) {
   const [alert, setAlertState] = useState(null)
 
   const setAlert = (msg, type) => {
@@ -11,7 +11,7 @@ const AlertState = props => {
 
   return (
     <AlertContext.Provider value={{ alert, setAlert }}>
-      {props.children}
+      {children}
     </AlertContext.Provider>
   )
 }

@@ -3,7 +3,7 @@ import React, { useReducer } from 'react'
 import GithubContext from './gitHubContext'
 import githubReducer from './gitHubReducer'
 
-const GithubState = props => {
+function GithubState(props) {
   const initialState = {
     users: [],
     user: {},
