@@ -19,10 +19,10 @@ The solution is not to add an empty array and tell the linter to ignore it (tryi
 
 so...
 
-1. Take all our fetching data methods out of GitHubState to keep them pure and not re-create a new function on each render/update [actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/main/src/context/github/actions.js).
+1. Take all our fetching data methods out of GitHubState to keep them pure and not re-create a new function on each render/update [actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/context/github/actions.js).
 2. return the promise from our data fetching methods.
-3. Only pass down our dispatch from our GitHubState Provider (React guarantees that our dispatch returned from useReducer is static and won't change) [GitHubState.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/main/src/context/github/GitHubState.jsx).
-4. Import the data fetching method we need in the component we need it, call that function in a component level useEffect and then dipsatch from our component [User.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/main/refactor/src/components/users/User.jsx).
+3. Only pass down our dispatch from our GitHubState Provider (React guarantees that our dispatch returned from useReducer is static and won't change) [GitHubState.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/context/github/GitHubState.jsx).
+4. Import the data fetching method we need in the component we need it, call that function in a component level useEffect and then dipsatch from our component [User.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/components/users/User.jsx).
 
 This cleans up our app considerably, follows the good advice from the react guidelines/linter, improves the quality and readability of our code and now we are thinking in terms of hooks and functions.
 
@@ -34,7 +34,7 @@ For this app we don't need to add any permissions so don't select any in the _sc
 **DO NOT SHARE ANY TOKENS THAT HAVE PERMISSIONS**
 This would leave your account or repositories vulnerable, depending on permissions set.
 
-On this branch you can see how to use the generated token in [/src/context/github/actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/main/refactor/src/context/github/actions.js)
+On this branch you can see how to use the generated token in [/src/context/github/actions.js](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/context/github/actions.js)
 
 You'll also need to change up your `.env.local` file to include
 
