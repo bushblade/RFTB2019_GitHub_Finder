@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import GithubContext from '../../context/github/gitHubContext'
 import Spinner from '../layout/Spinner'
@@ -7,7 +7,7 @@ import Repos from '../repos/Repos'
 import { getUserAndRepos } from '../../context/github/actions'
 import { GET_USER_AND_REPOS, SET_LOADING } from '../../context/types'
 
-const User = ({ match: { params } }) => {
+function User() {
   const {
     user: {
       name,
@@ -29,12 +29,14 @@ const User = ({ match: { params } }) => {
     repos
   } = useContext(GithubContext)
 
+  const { userId } = useParams()
+
   useEffect(() => {
     dispatch({ type: SET_LOADING })
-    getUserAndRepos(params.login).then(res =>
+    getUserAndRepos(userId).then((res) =>
       dispatch({ type: GET_USER_AND_REPOS, payload: res })
     )
-  }, [dispatch, params.login])
+  }, [dispatch, userId])
 
   if (loading) return <Spinner />
 
