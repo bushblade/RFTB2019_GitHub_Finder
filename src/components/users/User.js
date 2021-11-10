@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import GithubContext from '../../context/github/gitHubContext'
@@ -41,7 +41,7 @@ function User() {
   if (loading) return <Spinner />
 
   return (
-    <Fragment>
+    <>
       <Link to='/' className='btn btn-light'>
         Back to Search
       </Link>
@@ -64,36 +64,22 @@ function User() {
         </div>
         <div>
           {bio && (
-            <Fragment>
+            <>
               <h3>Bio</h3>
               <p>{bio}</p>
-            </Fragment>
+            </>
           )}
           <a href={html_url} className='btn btn-dark my-1'>
             Visit GitHub profile
           </a>
           <ul>
-            <li>
-              {login && (
-                <Fragment>
-                  <strong>Username: {login} </strong>
-                </Fragment>
-              )}
-            </li>
-            <li>
-              {company && (
-                <Fragment>
-                  <strong>Company: {company}</strong>
-                </Fragment>
-              )}
-            </li>
+            <li>{login && <strong>Username: {login} </strong>}</li>
+            <li>{company && <strong>Company: {company}</strong>}</li>
             <li>
               {blog && (
-                <Fragment>
-                  <strong>
-                    Website: <a href={`https://${blog}`}>{blog}</a>{' '}
-                  </strong>
-                </Fragment>
+                <strong>
+                  Website: <a href={`https://${blog}`}>{blog}</a>{' '}
+                </strong>
               )}
             </li>
           </ul>
@@ -106,7 +92,7 @@ function User() {
         <div className='badge badge-dark'>Public gists: {public_gists}</div>
       </div>
       <Repos repos={repos} />
-    </Fragment>
+    </>
   )
 }
 
