@@ -4,13 +4,12 @@ The first project in Brad Traversy's [React Front to Back 2019](https://www.udem
 
 The master branch is the final completed project from the course.
 
-## This branch I have refactored to take a more hook friendly context approach.
+## I have refactored the app to take a more hook friendly context approach.
 
 I think Brad at the time of the course tried to substitute lifecycle methods with the closest hooks approximation which is understandable and I see a lot of tutorials and courses doing much the same. Hooks were very new at the time of recording,
 however hooks require a completely different approach and thought process really. We need to think in terms of hooks and functions and not lifecycle.
 
 If you're looking at this branch and wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
-
 
 There is also [this great article](https://epicreact.dev/myths-about-useeffect/) from Kent C. Dodds which covers the issues we had in this course very well.
 
@@ -42,6 +41,18 @@ You'll also need to change up your `.env.local` file to include
 ```
 REACT_APP_GITHUB_TOKEN='token <your_no_permissions_token_here>'
 ```
+
+### React Router updated to version 6
+
+React Router Dom V6 introduced some breaking changes.
+Instead of `<Switch />` we now use `<Routes />`
+In place of a _component_ prop on our `<Route />` we now no longer pass a
+component but an _element_ with an element prop. There is also no longer an
+_exact_ prop.
+Most of the changes can be seen in [/src/App.js](App.js) and in
+[/src/components/users/User.js](User.js).
+
+You can read the full migration guide in react-router docs [https://reactrouter.com/docs/en/v6/upgrading/v5](here)
 
 ## Some notes before you deploy
 
