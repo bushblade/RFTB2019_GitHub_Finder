@@ -6,14 +6,17 @@ The master branch is the final completed project from the course.
 
 ## I have refactored the app to take a more hook friendly context approach.
 
-I think Brad at the time of the course tried to substitute lifecycle methods with the closest hooks approximation which is understandable and I see a lot of tutorials and courses doing much the same. Hooks were very new at the time of recording,
-however hooks require a completely different approach and thought process really. We need to think in terms of hooks and functions and not lifecycle.
+I think Brad at the time of the course tried to substitute life cycle methods with the closest hooks approximation which is understandable and I see a lot of tutorials and courses doing much the same. Hooks were very new at the time of recording,
+however hooks require a completely different approach and thought process really. We need to think in terms of hooks and functions and not life cycle.
 
 If you're looking at this branch and wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
 
 There is also [this great article](https://epicreact.dev/myths-about-useeffect/) from Kent C. Dodds which covers the issues we had in this course very well.
 
-To summarize the issues we faced in the course though, and why we had to use `// eslint-disable-next-line` at all is that all our data fetching methods are in our context state (GitHubState.jsx) and passed down to all our components via the Provider. The problem with this is that every time we update our context state we create a new function which is a side effect and react tells us that side effects should be in a useEffect. If we include these functions in our useEffect dependency array (as the linter suggests) in `User.jsx` then each time we fetch data and our reducer runs it updates the context which triggers a re-render (creating a whole set of new functions). The useEffect dependency sees it as a new function and triggers another render which again updates the state when we call the function in our useEffect, which triggers another re-render and so on.... infinite loop of re-rendering.
+To summarize the issues we faced in the course though, and why we had to use `// eslint-disable-next-line` at all is that all our data fetching methods are in our context state (GitHubState.jsx) and passed down to all our components via the Provider. The problem with this is that every time we update our context state we create a new function inside the GitHubState component.
+
+Functions being reference types are unique in memory so every time we update our state React invokes our GitHubState component/function again and we create new functions in the component.
+If we include one of those functions in a dependency array it will trigger a useEffect as the function changes every time because it's a new function, in memory it's not the same function even though it may have the same code and do the same thing and even be named the same. So if we include these functions in our useEffect dependency array (as the linter suggests) in `User.jsx` then each time we fetch data and our reducer runs it updates the context which triggers a re-render (creating a whole set of new functions). The useEffect dependency sees it as a new function and triggers another render which again updates the state when we call the function in our useEffect, which triggers another re-render and so on.... infinite loop of re-rendering.
 
 The solution is not to add an empty array and tell the linter to ignore it (trying to make a componentDidMount out of useEffect), but to think in terms of hooks and functions.
 
