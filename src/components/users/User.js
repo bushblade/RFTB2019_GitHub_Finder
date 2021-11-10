@@ -29,14 +29,14 @@ function User() {
     repos
   } = useContext(GithubContext)
 
-  const { userId } = useParams()
+  const { userName } = useParams()
 
   useEffect(() => {
     dispatch({ type: SET_LOADING })
-    getUserAndRepos(userId).then((res) =>
+    getUserAndRepos(userName).then((res) =>
       dispatch({ type: GET_USER_AND_REPOS, payload: res })
     )
-  }, [dispatch, userId])
+  }, [dispatch, userName])
 
   if (loading) return <Spinner />
 
