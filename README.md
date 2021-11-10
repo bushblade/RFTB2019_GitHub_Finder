@@ -49,8 +49,8 @@ Instead of `<Switch />` we now use `<Routes />`
 In place of a _component_ prop on our `<Route />` we now no longer pass a
 component but an _element_ with an element prop. There is also no longer an
 _exact_ prop.
-Most of the changes can be seen in [/src/App.jsx](App.jsx) and in
-[/src/components/users/User.jsx](User.jsx).
+Most of the changes can be seen in [App.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/App.jsx) and in
+[User.jsx](https://github.com/bushblade/RFTB2019_GitHub_Finder/blob/main/src/components/users/User.jsx).
 
 You can read the full migration guide in react-router docs [https://reactrouter.com/docs/en/v6/upgrading/v5](here)
 
