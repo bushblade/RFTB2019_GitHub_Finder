@@ -31,6 +31,7 @@ const User = ({ repos, getUserRepos }) => {
   useEffect(() => {
     getUser(userLogin)
     getUserRepos(userLogin)
+    // WARN: You should not ignore the linter
     // eslint-disable-next-line
   }, [])
 
@@ -69,27 +70,13 @@ const User = ({ repos, getUserRepos }) => {
             Visit GitHub profile
           </a>
           <ul>
-            <li>
-              {login && (
-                <Fragment>
-                  <strong>Username: {login} </strong>
-                </Fragment>
-              )}
-            </li>
-            <li>
-              {company && (
-                <Fragment>
-                  <strong>Company: {company}</strong>
-                </Fragment>
-              )}
-            </li>
+            <li>{login && <strong>Username: {login} </strong>}</li>
+            <li>{company && <strong>Company: {company}</strong>}</li>
             <li>
               {blog && (
-                <Fragment>
-                  <strong>
-                    Website: <a href={`https://${blog}`}>{blog}</a>{' '}
-                  </strong>
-                </Fragment>
+                <strong>
+                  Website: <a href={`https://${blog}`}>{blog}</a>{' '}
+                </strong>
               )}
             </li>
           </ul>
